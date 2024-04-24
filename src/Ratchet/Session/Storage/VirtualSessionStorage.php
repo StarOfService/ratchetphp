@@ -2,9 +2,9 @@
 
 namespace Ratchet\Session\Storage;
 
-use Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorage;
-use Ratchet\Session\Storage\Proxy\VirtualProxy;
 use Ratchet\Session\Serialize\HandlerInterface;
+use Ratchet\Session\Storage\Proxy\VirtualProxy;
+use Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorage;
 
 class VirtualSessionStorage extends NativeSessionStorage
 {
@@ -17,6 +17,7 @@ class VirtualSessionStorage extends NativeSessionStorage
      * @param \SessionHandlerInterface                    $handler
      * @param string                                      $sessionId The ID of the session to retrieve
      * @param \Ratchet\Session\Serialize\HandlerInterface $serializer
+     * @noinspection PhpMissingParentConstructorInspection
      */
     public function __construct(\SessionHandlerInterface $handler, $sessionId, HandlerInterface $serializer)
     {
@@ -29,7 +30,7 @@ class VirtualSessionStorage extends NativeSessionStorage
     /**
      * {@inheritdoc}
      */
-    public function start()
+    public function start(): bool
     {
         if ($this->started && !$this->closed) {
             return true;
@@ -56,15 +57,16 @@ class VirtualSessionStorage extends NativeSessionStorage
     /**
      * {@inheritdoc}
      */
-    public function regenerate($destroy = false, $lifetime = null)
+    public function regenerate($destroy = false, $lifetime = null): bool
     {
+        return true;
         // .. ?
     }
 
     /**
      * {@inheritdoc}
      */
-    public function save()
+    public function save(): void
     {
         // get the data from the bags?
         // serialize the data
@@ -81,7 +83,7 @@ class VirtualSessionStorage extends NativeSessionStorage
     /**
      * {@inheritdoc}
      */
-    public function setSaveHandler($saveHandler = null)
+    public function setSaveHandler($saveHandler = null): void
     {
         if (!($saveHandler instanceof \SessionHandlerInterface)) {
             throw new \InvalidArgumentException('Handler must be instance of SessionHandlerInterface');
