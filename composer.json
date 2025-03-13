@@ -37,8 +37,9 @@
     "react/socket": "^1.15.0",
     "react/event-loop": "^1.5.0",
     "guzzlehttp/psr7": "^2.6.0",
-    "symfony/http-foundation": "^6.4 || ^7.0",
-    "symfony/routing": "^6.4 || ^7.0"
+    "symfony/http-foundation": "^6.4 || ^7.2",
+    "symfony/routing": "^6.4 || ^7.2",
+    "nyholm/psr7": "^1.8"
   },
   "config": {
     "platform": {
